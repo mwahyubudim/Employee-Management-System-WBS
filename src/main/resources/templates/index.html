@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Employee Management System</title>
+<title>勤怠管理システム</title>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
 <style>
     body {
-        background-color: #f8f9fa;
+        background-color: #a8a8a8;
     }
     h1 {
         text-align: center;
@@ -17,25 +17,28 @@
     }
     .container {
         background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
+        padding: 10px;
+        border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        height: 100%;
     }
     .table th, .table td {
         vertical-align: middle;
         text-align: center;
+        width: fit-content;
     }
     .table th {
-        background-color: #007bff;
+        background-color: #a900b5;
         color: #fff;
     }
     .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
+        background-color: #00df16;
+        border-color: #ff0000;
     }
     .btn-outline-danger {
         border-color: #dc3545;
-        color: #dc3545;
+        color: #ff0000;
     }
     .btn-outline-danger:hover {
         background-color: #dc3545;
@@ -43,7 +46,7 @@
     }
     .form-control:focus {
         box-shadow: none;
-        border-color: #007bff;
+        border-color: #96ed00;
     }
     .mb-3, .my-2 {
         margin-bottom: 1rem !important;
@@ -55,7 +58,7 @@
         margin-left: 0.5rem;
     }
     .btn-small {
-    font-size: 0.875rem;
+    font-size: 0.5rem;
     padding: 5px 10px;
     margin: 2px;
     width: auto;
@@ -71,7 +74,7 @@
 
         <!-- Log Out button with margin -->
         <div class="mb-3" style="text-align: right;">
-            <a th:href="@{/logout}" class="btn btn-outline-danger">閉じる</a>
+            <a th:href="@{/logout}" class="btn btn-outline-danger">ログアウト</a>
         </div>
 
 		<!-- Buttons for adding and deleting employees -->
@@ -85,19 +88,19 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label for="searchId">社員ID</label>
-                        <input type="text" id="searchId" class="form-control" placeholder="社員ID" oninput="search()">
+                        <label for="searchId">社員 ID</label>
+                        <input type="text" id="searchId" class="form-control" placeholder="社員 ID" oninput="search()">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="searchJoiningDateFrom">入社年月日 From</label>
+                        <label for="searchJoiningDateFrom">入社年月日から</label>
                         <input type="date" id="searchJoiningDateFrom" class="form-control" placeholder="入社年月日 From" oninput="search()">
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="searchJoiningDateTo">入社年月日 To</label>
+                        <label for="searchJoiningDateTo">入社年月日まで</label>
                         <input type="date" id="searchJoiningDateTo" class="form-control" placeholder="入社年月日 To" oninput="search()">
                     </div>
                 </div>
@@ -126,7 +129,7 @@
             <thead>
                 <tr>
                     <th class="text-center">選択</th>
-                    <th class="text-center">社員ID</th>
+                    <th class="text-center">社員 ID</th>
                     <th class="text-center">入社年月日</th>
                     <th class="text-center">氏名</th>
                     <th class="text-center">性別</th>
@@ -159,7 +162,7 @@
         <div th:if="${totalPages > 1}">
             <div class="row col-sm-10">
                 <div class="col-sm-2">
-                    Total Rows: [[${totalItems}]] 
+                    合計行数； [[${totalItems}]] 
                 </div>
                 <div class="col-sm-1">
                     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
@@ -168,12 +171,12 @@
                     </span>
                 </div>
                 <div class="col-sm-1">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
-                    <span th:unless="${currentPage < totalPages}">Next</span>
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">次へ</a>
+                    <span th:unless="${currentPage < totalPages}">次へ</span>
                 </div>
                 <div class="col-sm-1">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
-                    <span th:unless="${currentPage < totalPages}">Last</span>
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">最後</a>
+                    <span th:unless="${currentPage < totalPages}">最後</span>
                 </div>
             </div>
         </div>
