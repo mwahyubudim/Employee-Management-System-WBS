@@ -162,24 +162,21 @@
         <div th:if="${totalPages > 1}">
             <div class="row col-sm-10">
                 <div class="col-sm-2">
-                    合計行数； [[${totalItems}]] 
+                    合計行数: [[${totalItems}]]
                 </div>
-                <div class="col-sm-1">
+                <div class="col-sm-9"> <!-- Adjusted size to accommodate all pagination links -->
                     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                        <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
-                        <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
-                    </span>
-                </div>
-                <div class="col-sm-1">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">次へ</a>
-                    <span th:unless="${currentPage < totalPages}">次へ</span>
-                </div>
-                <div class="col-sm-1">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">最後</a>
+                <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+                <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+            </span>
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">次へ</a>
+                    <span th:unless="${currentPage < totalPages}">次へ </span>  &nbsp;
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">最後</a>
                     <span th:unless="${currentPage < totalPages}">最後</span>
                 </div>
             </div>
         </div>
+
     </div>
 
     <script>
